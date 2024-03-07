@@ -1,16 +1,16 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
-class PostBase(BaseModel):
+class ProductBase(BaseModel):
     title : str
-    content : str
+    description : str
     published : bool = True
     
-class PostCreate(PostBase):
+class ProductCreate(ProductBase):
         pass
 
 
-class Post(PostBase):
+class Product(ProductBase):
         id: int
         created_at: datetime
         

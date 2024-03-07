@@ -15,8 +15,8 @@ def get_product(db : Session = Depends(get_db), response_model=List[schemas.Prod
     product = db.query(models.Post).all()
     return product
 
-@router.product("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Product)
-def create_product(product : schemas.PostCreate, db : Session = Depends(get_db),):
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Product)
+def create_product(product : schemas.ProductCreate, db : Session = Depends(get_db),):
     
     new_product = models.Post(**product.dict())
     db.add(new_product)
@@ -32,9 +32,6 @@ def get_product(id: int, response: Response, db : Session = Depends(get_db), res
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
                             detail=f"product with id: {id} was not found")
     return product
-
-
-
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)

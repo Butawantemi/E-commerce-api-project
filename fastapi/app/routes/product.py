@@ -12,13 +12,13 @@ router = APIRouter(
 
 @router.get("/")
 def get_product(db : Session = Depends(get_db), response_model=List[schemas.Product]):
-    product = db.query(models.Post).all()
+    product = db.query(models.Product).all()
     return product
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Product)
 def create_product(product : schemas.ProductCreate, db : Session = Depends(get_db),):
     
-    new_product = models.Post(**product.dict())
+    new_product = models.Product(**product.dict())
     db.add(new_product)
     db.commit()
     db.refresh(new_product)

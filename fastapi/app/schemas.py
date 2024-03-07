@@ -4,6 +4,7 @@ from datetime import datetime
 class ProductBase(BaseModel):
     title : str
     description : str
+    price: float
     published : bool = True
     
 class ProductCreate(ProductBase):
